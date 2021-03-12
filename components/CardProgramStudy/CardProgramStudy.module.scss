@@ -1,0 +1,21 @@
+.card {
+  margin-bottom: 20px;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: transparent;
+  // font-size: 1rem;
+
+  .cardImage {
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+  }
+  .cardBody {
+    font-size: 0.9em;
+  }
+  .title {
+    font-size: 1em;
+  }
+}

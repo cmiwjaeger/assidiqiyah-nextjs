@@ -1,0 +1,39 @@
+.container {
+  max-width: 1200px;
+  padding: 0 15px;
+  flex-direction: column;
+}
+.ribbon_item {
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.logo {
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.column {
+  flex-direction: row;
+  .header {
+    color: #2b2b2b;
+  }
+  .subHeader {
+    color: #575757;
+  }
+}
+
+.header {
+  color: red;
+}
+
+.navbar_top {
+  border-top: #e5dfdf 1px solid;
+}
+
+.navbar {
+  padding-left: 0;
+  padding-right: 0;
+}

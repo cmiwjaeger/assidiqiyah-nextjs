@@ -1,0 +1,62 @@
+html,
+body {
+  .navigation-bar nav {
+    max-width: 100%;
+    flex: 100%;
+    a {
+      text-decoration: none;
+    }
+  }
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins";
+  h1 {
+    font-size: 4em;
+  }
+
+  h2 {
+    font-size: 3em;
+  }
+
+  h6 {
+    font-size: 12px;
+  }
+
+  .nav-link {
+    color: black;
+    font-size: 20px;
+  }
+
+  .my-primary {
+    color: #26a893;
+  }
+
+  .font-weight-bold {
+    font-weight: 800;
+  }
+
+  .contact-info-svg {
+    color: #26a893;
+    vertical-align: top;
+    position: relative;
+    top: 6px;
+    height: auto;
+    // height: 24px;
+    // width: 15px;
+    // margin-top: 3px;
+  }
+
+  .circular {
+    border-radius: 50%;
+  }
+
+  .fa-li {
+    top: 5px;
+    // bottom: 2px;
+  }
+
+  .main-section {
+    background-position: 180% 0px;
+  }
+}

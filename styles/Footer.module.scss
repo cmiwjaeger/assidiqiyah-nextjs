@@ -1,0 +1,23 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.logo_wrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  align-items: center;
+}
+
+.column {
+  flex-direction: row;
+  .header {
+    color: #2b2b2b;
+  }
+  .subHeader {
+    color: #575757;
+    font-size: 0.9em;
+  }
+}
