@@ -1,22 +1,30 @@
+import { useEffect } from "react";
 import Head from "next/head";
-import styles from "../styles/Profile.module.scss";
 import cl from "classnames";
 
 import Layout from "../components/layouts";
-import { Card, Col, Container, Row } from "reactstrap";
+import { Card, CardBody, Col, Container, Row } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenFancy } from "@fortawesome/free-solid-svg-icons";
-import {} from "@fortawesome/free-regular-svg-icons";
+
 import Jumbotron from "../components/Jumbotron";
+import styles from "../styles/Profile.module.scss";
 
 export default function Profile() {
+  useEffect(() => {
+    $(".masonary").isotope({
+      masonry: {
+        columnWidth: 0.5,
+      },
+    });
+  }, []);
   return (
     <Layout>
       <Jumbotron title="PROFILE" />
 
       <Container className={styles.container}>
         <Row style={{ display: "flex", alignItems: "center" }}>
-          <Col>
+          <Col xs={12} className="wow fadeInLeft" data-wow-duration="1000ms">
             <h1 className="font-weight-bold my-primary">HISTORY</h1>
             <p style={{ textAlign: "justify" }}>
               Morbi vel augue et metus pellentesque lacinia eu non odio. Sed id
@@ -35,7 +43,7 @@ export default function Profile() {
               leo sagittis et.
             </p>
           </Col>
-          <Col>
+          <Col xs={12} className="wow fadeInRight" data-wow-duration="1000ms">
             <div>
               <img
                 src="https://via.placeholder.com/565x565.png"
@@ -46,7 +54,7 @@ export default function Profile() {
           </Col>
         </Row>
         <Row style={{ display: "flex", alignItems: "center" }}>
-          <Col>
+          <Col xs={12} className="wow fadeInLeft" data-wow-duration="1000ms">
             <div>
               <img
                 src="https://via.placeholder.com/565x565.png"
@@ -55,7 +63,7 @@ export default function Profile() {
               />
             </div>
           </Col>
-          <Col>
+          <Col xs={12} className="wow fadeInRight" data-wow-duration="1000ms">
             <h1 className="my-primary">
               <span className="font-weight-bold">VISI </span>
               DAN MISI
@@ -100,7 +108,29 @@ export default function Profile() {
             </p>
           </Col>
           <Col>
-            <div style={{ display: "flex" }}></div>
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
+              {[1, 2, 3, 4].map((item, index) => (
+                <div
+                  key={index}
+                  className={cl([styles.cardWrapper, ` wow zoomIn`])}
+                  data-wow-duration={`1000ms`}
+                  data-wow-offset={`${1000 + index * 1000}ms`}
+                >
+                  <Card
+                    className={styles.card}
+                    style={{
+                      marginTop: index % 2 !== 0 ? 20 : 0,
+                    }}
+                  >
+                    <CardBody>
+                      <div>Image</div>
+                      <div>title</div>
+                      <div>Content</div>
+                    </CardBody>
+                  </Card>
+                </div>
+              ))}
+            </div>
           </Col>
         </Row>
       </Container>

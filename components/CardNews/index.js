@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from "react";
+import {
+  faPhone,
+  faMapMarkerAlt,
+  faLongArrowAltRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
   Card,
@@ -32,7 +38,13 @@ export default function CardNews() {
           Some quick example text to build on the card title and make up the
           bulk of the card's content.
         </CardText>
-        <Button color="link">Read</Button>
+        <Button color="link">
+          Read
+          <FontAwesomeIcon
+            icon={faLongArrowAltRight}
+            style={{ marginLeft: 10 }}
+          />
+        </Button>
       </CardBody>
     </Card>
   );

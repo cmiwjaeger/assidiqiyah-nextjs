@@ -1,7 +1,14 @@
-.card {
-  margin-bottom: 20px;
-  border: none;
-  .cardImage {
-    border-radius: 10px;
+.container {
+  background-image: url("../../public/assets/img/bg-jumbotron.jpeg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+  .card {
+    margin-bottom: 20px;
+
+    border: none;
+    .cardImage {
+      border-radius: 10px;
+    }
   }
 }

@@ -1,5 +1,6 @@
 html,
 body {
+  background-color: #f8f8f8;
   .navigation-bar nav {
     max-width: 100%;
     flex: 100%;
@@ -49,6 +50,7 @@ body {
 
   .circular {
     border-radius: 50%;
+    width: 100%;
   }
 
   .fa-li {
@@ -58,5 +60,27 @@ body {
 
   .main-section {
     background-position: 180% 0px;
+  }
+  .abt-img {
+    width: 10000px;
+    background-repeat: no-repeat;
+    background-position: center;
+    > img {
+      max-width: 100%;
+    }
+
+    .widths {
+      width: 80px;
+    }
+  }
+
+  .long-arrow-alt-right {
+    height: 24px;
+    width: 13px;
+    color: #155799;
+    font-family: "Font Awesome 5 Free";
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 24px;
   }
 }

@@ -1,4 +1,16 @@
 .container {
   padding-top: 80px;
   padding-bottom: 80px;
+  .cardWrapper {
+    display: flex;
+    flex: 50%;
+    .card {
+      border: none;
+      background-color: transparent;
+      .cardBody {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
 }

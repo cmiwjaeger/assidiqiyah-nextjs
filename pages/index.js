@@ -7,10 +7,18 @@ import CardNews from "../components/CardNews";
 import CardProgramStudy from "../components/CardProgramStudy";
 
 import styles from "../styles/Home.module.scss";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    $(".masonary").isotope({
+      masonry: {
+        columnWidth: 0.5,
+      },
+    });
+  }, []);
   return (
-    <Layout>
+    <Layout withBg>
       <Container
         fluid
         style={{ minHeight: "80vh" }}
@@ -40,7 +48,6 @@ export default function Home() {
           </Col>
         </Row>
       </Container>
-
       <Container>
         <Row style={{ display: "flex", justifyContent: "center" }}>
           <Col md={9} className="text-center">
@@ -97,12 +104,12 @@ export default function Home() {
           </Col>
         </Row>
 
-        <div className="abt-img">
+        <div className="abt-img" style={{ width: "100%" }}>
           <ul className="masonary">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
               <li
                 key={index}
-                className={`width${index + 1} wow zoomIn`}
+                className={`width${item} wow zoomIn`}
                 data-wow-duration="1000ms"
               >
                 <a
@@ -118,7 +125,6 @@ export default function Home() {
           </ul>
         </div>
       </Container>
-
       <Container>
         <Row style={{ display: "flex", justifyContent: "center" }}>
           <Col md={9} className="text-center">

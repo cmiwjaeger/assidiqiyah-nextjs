@@ -1,34 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import {
-  Container,
-  Row,
-  Col,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from "reactstrap";
 import cl from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
-import { faClock } from "@fortawesome/free-regular-svg-icons";
 
 import styles from "../../styles/Header.module.scss";
 
 export default function Header(props) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
+  const isActiveLink = (url) => {
+    if (url == "/") {
+      return router.pathname == "/" ? "active" : "";
+    } else {
+      return router.pathname.includes(url) ? "active" : "";
+    }
+  };
 
   return (
     <>
@@ -67,7 +59,7 @@ export default function Header(props) {
               </li>
               <li>
                 <div className="contact-info">
-                  <img src="assets/img/icon2.png" alt="" />
+                  {/* <img src="assets/img/icon2.png" alt="" /> */}
                   <div className="contact-tt">
                     <h4>Work Time</h4>
                     <span>Mon - Fri 8 AM - 5 PM</span>
@@ -79,14 +71,24 @@ export default function Header(props) {
                   <img src="assets/img/icon3.png" alt="" />
                   <div className="contact-tt">
                     <h4>Address</h4>
-                    <span>Franklin St, Greenpoint Ave</span>
+                    <span>
+                      Jl. Hos. Cokroaminoto no.2 Ciledug, Tangerang 15151
+                    </span>
                   </div>
                 </div>
               </li>
             </ul>
 
-            <div className="menu-btn">
-              <a href="#">
+            <div
+              className={cl([
+                "menu-btn",
+                {
+                  active: isOpen,
+                },
+              ])}
+              onClick={toggle}
+            >
+              <a>
                 <span className="bar1"></span>
                 <span className="bar2"></span>
                 <span className="bar3"></span>
@@ -98,33 +100,35 @@ export default function Header(props) {
             <nav>
               <ul>
                 <li>
-                  <Link href="/" className="active">
-                    Home
+                  <Link href="/">
+                    <a className={isActiveLink("/")}>Home</a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/profile" className="active">
-                    Profile
+                  <Link href="/profile">
+                    <a className={isActiveLink("profile")}>Profile</a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/news" className="active">
-                    News
+                  <Link href="/news">
+                    <a className={isActiveLink("news")}>News</a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/facilities" className="active">
-                    Facilities
+                  <Link href="/facilities">
+                    <a className={isActiveLink("facilities")}>Facilities</a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="active">
-                    School Achivements
+                  <Link href="/achivements" className="active">
+                    <a className={isActiveLink("achivements")}>
+                      School Achivements
+                    </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="active">
-                    Teacher
+                  <Link href="/teachers" className="active">
+                    <a className={isActiveLink("teachers")}>Teacher</a>
                   </Link>
                 </li>
               </ul>
@@ -133,171 +137,48 @@ export default function Header(props) {
         </div>
       </header>
 
-      <div className="responsive-menu">
+      <div
+        className="responsive-menu"
+        className={cl([
+          "responsive-menu",
+          {
+            active: isOpen,
+          },
+        ])}
+      >
         <ul>
           <li>
-            <a href="index.html" title="">
-              Home
-            </a>
+            <Link href="/">
+              <a className={isActiveLink("/")}>Home</a>
+            </Link>
           </li>
           <li>
-            <a href="about.html" title="">
-              About
-            </a>
+            <Link href="/profile">
+              <a className={isActiveLink("profile")}>Profile</a>
+            </Link>
           </li>
           <li>
-            <a href="events.html" title="">
-              Events
-            </a>
+            <Link href="/news">
+              <a className={isActiveLink("news")}>News</a>
+            </Link>
           </li>
           <li>
-            <a href="event-single.html" title="">
-              Event Single
-            </a>
+            <Link href="/facilities">
+              <a className={isActiveLink("facilities")}>Facilities</a>
+            </Link>
           </li>
           <li>
-            <a href="schedule.html" title="">
-              Schedule
-            </a>
+            <Link href="/achivements" className="active">
+              <a className={isActiveLink("achivements")}>School Achivements</a>
+            </Link>
           </li>
           <li>
-            <a href="classes.html" title="">
-              Classes
-            </a>
-          </li>
-          <li>
-            <a href="class-single.html" title="">
-              Classe Single
-            </a>
-          </li>
-          <li>
-            <a href="teachers.html" title="">
-              Teachers
-            </a>
-          </li>
-          <li>
-            <a href="teacher-single.html" title="">
-              Teacher Single
-            </a>
-          </li>
-          <li>
-            <a href="blog.html" title="">
-              Blog
-            </a>
-          </li>
-          <li>
-            <a href="post.html" title="">
-              Blog Single
-            </a>
-          </li>
-          <li>
-            <a href="contacts.html" title="">
-              Contacts
-            </a>
-          </li>
-          <li>
-            <a href="error.html" title="">
-              404
-            </a>
+            <Link href="/teachers" className="active">
+              <a className={isActiveLink("teachers")}>Teacher</a>
+            </Link>
           </li>
         </ul>
       </div>
     </>
-  );
-
-  return (
-    <Container fluid style={{ height: 137, padding: 0 }}>
-      <Row className={styles.navbar_top}>
-        <Col>
-          <div className={cl([styles.ribbon_item, styles.logo])}>
-            <img width={59} height={59} src="images/assidiqiyah-logo.png" />
-            <div>
-              <div
-                style={{
-                  marginLeft: 10,
-                  fontWeight: "bold",
-                  fontSize: "0.8rem",
-                  lineHeight: 0.9,
-                }}
-              >
-                YAYASAN PENDIDIKAN ISLAM <br /> ASSIDIQIYAH
-              </div>
-            </div>
-          </div>
-        </Col>
-        <Col md={2}>
-          <div className={[styles.ribbon_item]}>
-            <div className="my-icon">
-              <FontAwesomeIcon icon={faPhone} />
-            </div>
-            <div className={styles.column}>
-              <div className={styles.header}>Call</div>
-              <div className={styles.subHeader}>+62 812371</div>
-            </div>
-          </div>
-        </Col>
-        <Col md={3}>
-          <div className={[styles.ribbon_item]}>
-            <div className="my-icon">
-              <FontAwesomeIcon icon={faClock} />
-            </div>
-            <div className={styles.column}>
-              <div className={styles.header}>Work Time</div>
-              <div className={styles.subHeader}>Mon - Fri 8 AM - 5 PM</div>
-            </div>
-          </div>
-        </Col>
-        <Col md={3}>
-          <div className={[styles.ribbon_item]}>
-            <div className="my-icon">
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-            </div>
-            <div className={styles.column}>
-              <div className={styles.header}>Address</div>
-              <div className={styles.subHeader}>
-                Jl. Hos. Cokroaminoto no.2 Ciledug, Tangerang 15151
-              </div>
-            </div>
-          </div>
-        </Col>
-      </Row>
-      <Navbar expand="md" className={styles.navbar}>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <Link href="/" passHref>
-                <NavLink>Home</NavLink>
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link href="/profile" passHref>
-                <NavLink>Profile</NavLink>
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link href="/news" passHref>
-                <NavLink>News</NavLink>
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link href="/achivements" passHref>
-                <NavLink>School Achivements</NavLink>
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link href="/facilities" passHref>
-                <NavLink>Facilities</NavLink>
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link href="/teachers" passHref>
-                <NavLink>Teacher</NavLink>
-              </Link>
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </Container>
   );
 }

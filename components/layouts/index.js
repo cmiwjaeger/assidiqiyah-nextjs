@@ -5,17 +5,24 @@ import { Container, Row, Col } from "reactstrap";
 import Header from "./header";
 import Footer from "./footer";
 
-export default function Layout({ children }) {
+export default function Layout({ children, withBg }) {
   return (
     <div>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="main-section">
-        <Header />
-        <Container>{children}</Container>
-      </div>
+      {withBg ? (
+        <div className="main-section">
+          <Header />
+          <Container>{children}</Container>
+        </div>
+      ) : (
+        <>
+          <Header />
+          <Container>{children}</Container>
+        </>
+      )}
       <Footer />
     </div>
   );
