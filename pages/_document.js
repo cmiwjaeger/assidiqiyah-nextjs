@@ -21,9 +21,9 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <NextScript />
 
           <script src="assets/js/bundle.min.js"></script>
+          <NextScript />
         </body>
       </Html>
     );
