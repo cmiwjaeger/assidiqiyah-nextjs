@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import cl from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
 
 import styles from "../../styles/Header.module.scss";
 
@@ -60,6 +61,11 @@ export default function Header(props) {
               <li>
                 <div className="contact-info">
                   {/* <img src="assets/img/icon2.png" alt="" /> */}
+                  <FontAwesomeIcon
+                    icon={faClock}
+                    className="contact-info-svg"
+                  />
+
                   <div className="contact-tt">
                     <h4>Work Time</h4>
                     <span>Mon - Fri 8 AM - 5 PM</span>
@@ -68,7 +74,11 @@ export default function Header(props) {
               </li>
               <li>
                 <div className="contact-info">
-                  <img src="assets/img/icon3.png" alt="" />
+                  <FontAwesomeIcon
+                    icon={faMapMarkerAlt}
+                    className="contact-info-svg"
+                  />
+
                   <div className="contact-tt">
                     <h4>Address</h4>
                     <span>
