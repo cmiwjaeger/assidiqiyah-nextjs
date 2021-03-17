@@ -24,7 +24,12 @@ export default function Profile() {
 
       <Container className={styles.container}>
         <Row style={{ display: "flex", alignItems: "center" }}>
-          <Col xs={12} className="wow fadeInLeft" data-wow-duration="1000ms">
+          <Col
+            xs={12}
+            md={6}
+            className="wow fadeInLeft"
+            data-wow-duration="1000ms"
+          >
             <h1 className="font-weight-bold my-primary">HISTORY</h1>
             <p style={{ textAlign: "justify" }}>
               Morbi vel augue et metus pellentesque lacinia eu non odio. Sed id
@@ -43,7 +48,12 @@ export default function Profile() {
               leo sagittis et.
             </p>
           </Col>
-          <Col xs={12} className="wow fadeInRight" data-wow-duration="1000ms">
+          <Col
+            xs={12}
+            md={6}
+            className="wow fadeInRight"
+            data-wow-duration="1000ms"
+          >
             <div>
               <img
                 src="https://via.placeholder.com/565x565.png"
@@ -54,7 +64,12 @@ export default function Profile() {
           </Col>
         </Row>
         <Row style={{ display: "flex", alignItems: "center" }}>
-          <Col xs={12} className="wow fadeInLeft" data-wow-duration="1000ms">
+          <Col
+            xs={12}
+            md={6}
+            className="wow fadeInLeft"
+            data-wow-duration="1000ms"
+          >
             <div>
               <img
                 src="https://via.placeholder.com/565x565.png"
@@ -63,7 +78,12 @@ export default function Profile() {
               />
             </div>
           </Col>
-          <Col xs={12} className="wow fadeInRight" data-wow-duration="1000ms">
+          <Col
+            xs={12}
+            md={6}
+            className="wow fadeInRight"
+            data-wow-duration="1000ms"
+          >
             <h1 className="my-primary">
               <span className="font-weight-bold">VISI </span>
               DAN MISI
@@ -112,9 +132,9 @@ export default function Profile() {
               {[1, 2, 3, 4].map((item, index) => (
                 <div
                   key={index}
-                  className={cl([styles.cardWrapper, ` wow zoomIn`])}
-                  data-wow-duration={`1000ms`}
-                  data-wow-offset={`${1000 + index * 1000}ms`}
+                  className={cl([styles.cardWrapper, `wow zoomIn`])}
+                  data-wow-duration="1000ms"
+                  data-wow-delay={`${index * 500}ms`}
                 >
                   <Card
                     className={styles.card}
