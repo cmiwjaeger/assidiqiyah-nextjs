@@ -15,7 +15,7 @@ export default function Facilities() {
     <Layout>
       <Jumbotron title="FACILITIES" />
       <Container>
-        <Row md={3}>
+        <Row md={2}>
           <Col>
             <CardNews />
           </Col>

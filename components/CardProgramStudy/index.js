@@ -17,6 +17,7 @@ export default function CardProgramStudy({
   title,
   cardClassName,
   cardDelayAnimation,
+  image = "https://via.placeholder.com/100x100.png",
 }) {
   return (
     <Card
@@ -28,7 +29,7 @@ export default function CardProgramStudy({
         top
         width="100"
         height="100"
-        src="https://via.placeholder.com/100x100.png"
+        src={image}
         style={{ borderRadius: "50%" }}
         alt="Card image cap"
         className={styles.cardImage}

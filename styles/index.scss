@@ -1,5 +1,10 @@
 html,
 body {
+  h1.my-primary > div > p {
+    font-size: inherit;
+    color: inherit;
+    font-family: inherit;
+  }
   background-color: #f8f8f8;
   .navigation-bar nav {
     max-width: 100%;
@@ -82,5 +87,10 @@ body {
     font-size: 14px;
     letter-spacing: 0;
     line-height: 24px;
+  }
+
+  .main-section .elements-bg {
+    top: -30%;
+    right: -13%;
   }
 }

@@ -15,7 +15,7 @@ export default function Achivements() {
     <Layout>
       <Jumbotron title="ACHIVEMENTS" />
       <Container>
-        <Row md={3}>
+        <Row md={4}>
           <Col>
             <CardNews />
           </Col>

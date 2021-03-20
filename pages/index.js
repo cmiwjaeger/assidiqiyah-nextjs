@@ -9,7 +9,9 @@ import CardProgramStudy from "../components/CardProgramStudy";
 import styles from "../styles/Home.module.scss";
 import { useEffect, useState } from "react";
 
-export default function Home() {
+import MarkdownView from "react-showdown";
+
+export default function Home(prop) {
   useEffect(() => {
     $(".masonary").isotope({
       masonry: {
@@ -17,6 +19,8 @@ export default function Home() {
       },
     });
   }, []);
+
+  const { data: props } = prop;
   return (
     <Layout withBg>
       <Container
@@ -28,39 +32,36 @@ export default function Home() {
         <Row>
           <Col md={7}>
             <div className="wow fadeInLeft" data-wow-duration="1000ms">
-              <h1 className="font-weight-bold">YAYASAN PENDIDIKAN</h1>
-              <h1 className="font-weight-bold my-primary">ISLAM ASSIDIQIYAH</h1>
-
-              <h6>
-                KINDERGARDEN - ELEMENTARY SCHOOL - JUNIOR HIGH SCHOOL - SENIOR
-                HIGH SCHOOL
-              </h6>
+              {props.section[0].title.split(", ").map((item, index) => {
+                if (index == 0) {
+                  return <h1 className="font-weight-bold">{item}</h1>;
+                } else {
+                  return (
+                    <h1 className="font-weight-bold my-primary">{item}</h1>
+                  );
+                }
+              })}
+              <h6>{props.section[0].subtitle}</h6>
             </div>
           </Col>
           <Col md={5}>
-            <div className="banner-img wow zoomIn" data-wow-duration="1000ms">
-              {/* <img src="https://via.placeholder.com/497x586" alt="" /> */}
+            <div className="elements-bg wow zoomIn" data-wow-duration="1000ms">
+              <img
+                height="200"
+                width="200"
+                src={`${process.env.REACT_APP_URL}${props.section[0].image[0]?.formats.small.url}`}
+                alt=""
+                className={styles.circular}
+              />
             </div>
-            <div
-              className="elements-bg wow zoomIn"
-              data-wow-duration="1000ms"
-            ></div>
           </Col>
         </Row>
       </Container>
       <Container>
         <Row style={{ display: "flex", justifyContent: "center" }}>
           <Col md={9} className="text-center">
-            <h1 className="my-primary">
-              <span className="font-weight-bold">Program</span> Study
-            </h1>
-            <p>
-              Sekolah An-Nisaa’ ingin Menjadikan seorang siswa/i Pemimpin Bangsa
-              yang beriman, bertaqwa dan bernurani. Karakter kepemimpinan
-              tersebut mengacu kepada nilai inti Sekolah An Nisaa’ yaitu 10 adab
-              Annisaa yang terdiri dari Sabar, Syukur, Peduli, Jujur, Amanah,
-              Disiplin, Kebersamaan, Rendah Hati, Damai dan Ikhlas
-            </p>
+            <h1 className="my-primary">{props.section[1].title}</h1>
+            <p>{props.section[1].desc}</p>
           </Col>
         </Row>
         <Row md={4}>
@@ -69,6 +70,7 @@ export default function Home() {
               title="TK Al - Hasanah"
               cardClassName="wow fadeInUp"
               cardDelayAnimation="100ms"
+              image={"images/assidiqiyah-logo.png"}
             />
           </Col>
           <Col>
@@ -76,6 +78,7 @@ export default function Home() {
               title="SD Al - Hasanah"
               cardClassName="wow fadeInUp"
               cardDelayAnimation="300ms"
+              image={"images/assidiqiyah-logo.png"}
             />
           </Col>
           <Col>
@@ -83,6 +86,7 @@ export default function Home() {
               title="SD Al - Hasanah"
               cardClassName="wow fadeInUp"
               cardDelayAnimation="500ms"
+              image={"images/assidiqiyah-logo.png"}
             />
           </Col>
           <Col>
@@ -90,6 +94,7 @@ export default function Home() {
               title="SD Al - Hasanah"
               cardClassName="wow fadeInUp"
               cardDelayAnimation="700ms"
+              image={"images/assidiqiyah-logo.png"}
             />
           </Col>
         </Row>
@@ -99,26 +104,30 @@ export default function Home() {
         <Row>
           <Col>
             <h1 className="my-primary">
-              <span className="font-weight-bold">Social Media</span> Update
+              {props.section[2].title}
+              {/* <span className="font-weight-bold">Social Media</span> Update */}
             </h1>
           </Col>
         </Row>
 
         <div className="abt-img" style={{ width: "100%" }}>
           <ul className="masonary">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+            {props.section[2].image.map((item, index) => (
               <li
                 key={index}
-                className={`width${item} wow zoomIn`}
+                className={`width${index + 1} wow zoomIn`}
                 data-wow-duration="1000ms"
               >
                 <a
-                  href="https://via.placeholder.com/1414x943"
+                  href={`${process.env.REACT_APP_URL}${item.url}`}
                   data-group="set1"
                   title=""
                   className="html5lightbox"
                 >
-                  <img src="https://via.placeholder.com/1414x943" alt="" />
+                  <img
+                    src={`${process.env.REACT_APP_URL}${item.formats.thumbnail.url}`}
+                    alt=""
+                  />
                 </a>
               </li>
             ))}
@@ -156,4 +165,15 @@ export default function Home() {
       </Container>
     </Layout>
   );
+}
+
+export async function getStaticProps(context) {
+  const response = await fetch(`${process.env.REACT_APP_URL}/home-page`);
+  const data = await response.json();
+  console.log(data);
+  return {
+    props: {
+      data,
+    }, // will be passed to the page component as props
+  };
 }

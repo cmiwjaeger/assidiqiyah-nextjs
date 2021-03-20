@@ -6,36 +6,60 @@ import Layout from "../components/layouts";
 import { Card, Col, Container, Row } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenFancy } from "@fortawesome/free-solid-svg-icons";
-import CardNews from "../components/CardNews";
+import CardTeacher from "../components/CardTeacher";
+import CardProgramStudy from "../components/CardProgramStudy";
 
 import Jumbotron from "../components/Jumbotron";
 
 export default function Teachers() {
   return (
     <Layout>
-      <Jumbotron title="TEACHERS" />
+      <Jumbotron title="TEACHER" />
       <Container>
-        <Row md={3}>
+        <Row md={4}>
           <Col>
-            <CardNews />
+            <CardProgramStudy
+              title="TK Al - Hasanah"
+              cardClassName="wow fadeInUp"
+              cardDelayAnimation="100ms"
+              image={"images/assidiqiyah-logo.png"}
+            />
           </Col>
           <Col>
-            <CardNews />
+            <CardProgramStudy
+              title="SD Al - Hasanah"
+              cardClassName="wow fadeInUp"
+              cardDelayAnimation="300ms"
+              image={"images/assidiqiyah-logo.png"}
+            />
           </Col>
           <Col>
-            <CardNews />
+            <CardProgramStudy
+              title="SD Al - Hasanah"
+              image=""
+              cardClassName="wow fadeInUp"
+              cardDelayAnimation="500ms"
+              image={"images/assidiqiyah-logo.png"}
+            />
           </Col>
           <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
+            <CardProgramStudy
+              title="SD Al - Hasanah"
+              cardClassName="wow fadeInUp"
+              cardDelayAnimation="700ms"
+              image={"images/assidiqiyah-logo.png"}
+            />
           </Col>
         </Row>
-      </Container>{" "}
+
+        <Row md={4}>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+            <Col index={index}>
+              <CardTeacher />
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </Layout>
   );
 }
