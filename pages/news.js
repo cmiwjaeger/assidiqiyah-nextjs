@@ -10,30 +10,48 @@ import CardNews from "../components/CardNews";
 
 import Jumbotron from "../components/Jumbotron";
 
+// GRAPHQL
+import { gql, useQuery } from "@apollo/client";
+
+// UTILS
+import { getPublicUrl, splitBoldTitle } from "../lib/utils";
+
+const QUERY = gql`
+  query {
+    posts {
+      id
+      title
+      content
+      created_at
+      image {
+        ... on UploadFile {
+          name
+          formats
+          url
+        }
+      }
+    }
+  }
+`;
+
 export default function News() {
+  const { loading, error, data } = useQuery(QUERY);
+
   return (
     <Layout>
       <Jumbotron title="NEWS" />
       <Container>
         <Row md={3}>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
+          {data?.posts.map((item, index) => (
+            <Col key={index}>
+              <CardNews
+                title={item.title}
+                subtitle={item.subtitle}
+                content={`${item.content.substring(0, 80)} ...`}
+                image={`${process.env.REACT_APP_URL}${item.image[0].formats.thumbnail.url}`}
+              />
+            </Col>
+          ))}
         </Row>
       </Container>{" "}
     </Layout>

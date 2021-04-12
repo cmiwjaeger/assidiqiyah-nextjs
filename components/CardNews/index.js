@@ -19,26 +19,23 @@ import cl from "classnames";
 
 import styles from "./CardNews.module.scss";
 
-export default function CardNews() {
+export default function CardNews({ title, subtitle, content, image }) {
   return (
     <Card className={styles.card}>
       <CardImg
         top
         width="100%"
-        src="https://via.placeholder.com/370x270.png"
+        src={image}
         alt="Card image cap"
         className={styles.cardImage}
       />
       <CardBody className={styles.cardBody}>
-        <CardTitle tag="h5">Card title</CardTitle>
+        <CardTitle tag="h5">{title}</CardTitle>
         <CardSubtitle tag="h6" className="mb-2 text-muted">
-          Card subtitle
+          {subtitle}
         </CardSubtitle>
-        <CardText>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </CardText>
-        <Button color="link">
+        <CardText>{content}</CardText>
+        <Button color="link" className={styles.button}>
           Read
           <FontAwesomeIcon
             icon={faLongArrowAltRight}

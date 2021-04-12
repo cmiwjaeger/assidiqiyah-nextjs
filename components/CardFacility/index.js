@@ -17,27 +17,24 @@ import {
 } from "reactstrap";
 import cl from "classnames";
 
-import styles from "./CardTeacher.module.scss";
+import styles from "./CardFacility.module.scss";
 
-export default function CardTeacher({
-  title = "Nama Pengajar",
-  subTitle = "matapelajaran",
-  image,
-}) {
+export default function CardFacility({ title, subtitle, content, image }) {
   return (
     <Card className={styles.card}>
       <CardImg
         top
         width="100%"
         src={image}
-        alt={title}
+        alt="Card image cap"
         className={styles.cardImage}
       />
       <CardBody className={styles.cardBody}>
         <CardTitle tag="h5">{title}</CardTitle>
         <CardSubtitle tag="h6" className="mb-2 text-muted">
-          {subTitle}
+          {subtitle}
         </CardSubtitle>
+        <CardText>{content}</CardText>
       </CardBody>
     </Card>
   );

@@ -7,20 +7,87 @@ import CardNews from "../components/CardNews";
 import CardProgramStudy from "../components/CardProgramStudy";
 
 import styles from "../styles/Home.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect } from "react";
 
-import MarkdownView from "react-showdown";
+import { gql, useQuery } from "@apollo/client";
 
-export default function Home(prop) {
-  useEffect(() => {
-    $(".masonary").isotope({
-      masonry: {
-        columnWidth: 0.5,
-      },
-    });
+const QUERY = gql`
+  query {
+    posts(limit: 6, sort: "created_at:desc") {
+      id
+      title
+      content
+      created_at
+      image {
+        ... on UploadFile {
+          name
+          formats
+          url
+        }
+      }
+    }
+    homePage {
+      id
+      content {
+        ... on ComponentSectionsSection {
+          title
+          images {
+            ... on UploadFile {
+              name
+              formats
+              url
+            }
+          }
+          action
+        }
+        ... on ComponentSectionsHeaderImage {
+          id
+          images {
+            ... on UploadFile {
+              name
+              formats
+            }
+          }
+        }
+        ... on ComponentSectionsHeaderFull {
+          __typename
+        }
+        ... on ComponentSectionsType4 {
+          title
+          desc
+          program_studies(sort: "id:desc") {
+            ... on ProgramStudy {
+              image {
+                ... on UploadFile {
+                  url
+                  name
+                  formats
+                }
+              }
+              id
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export default function Home(props) {
+  const { loading, error, data } = useQuery(QUERY);
+
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      $(".masonary").isotope({
+        masonry: {
+          columnWidth: 0.5,
+        },
+      });
+    }, 500);
   }, []);
+  if (loading) return null;
 
-  const { data: props } = prop;
   return (
     <Layout withBg>
       <Container
@@ -32,16 +99,24 @@ export default function Home(prop) {
         <Row>
           <Col md={7}>
             <div className="wow fadeInLeft" data-wow-duration="1000ms">
-              {props.section[0].title.split(", ").map((item, index) => {
-                if (index == 0) {
-                  return <h1 className="font-weight-bold">{item}</h1>;
-                } else {
-                  return (
-                    <h1 className="font-weight-bold my-primary">{item}</h1>
-                  );
-                }
-              })}
-              <h6>{props.section[0].subtitle}</h6>
+              {data?.homePage.content[0].title
+                .split(", ")
+                .map((item, index) => {
+                  if (index == 0) {
+                    return (
+                      <h1 key={index} className="font-weight-bold">
+                        {item}
+                      </h1>
+                    );
+                  } else {
+                    return (
+                      <h1 key={index} className="font-weight-bold my-primary">
+                        {item}
+                      </h1>
+                    );
+                  }
+                })}
+              <h6>{data?.homePage.content[0].subtitle}</h6>
             </div>
           </Col>
           <Col md={5}>
@@ -49,7 +124,7 @@ export default function Home(prop) {
               <img
                 height="200"
                 width="200"
-                src={`${process.env.REACT_APP_URL}${props.section[0].image[0]?.formats.small.url}`}
+                src={`${process.env.REACT_APP_URL}${data?.homePage.content[0].images[0]?.formats.small.url}`}
                 alt=""
                 className={styles.circular}
               />
@@ -60,51 +135,29 @@ export default function Home(prop) {
       <Container>
         <Row style={{ display: "flex", justifyContent: "center" }}>
           <Col md={9} className="text-center">
-            <h1 className="my-primary">{props.section[1].title}</h1>
-            <p>{props.section[1].desc}</p>
+            <h1 className="my-primary">{data?.homePage.content[1].title}</h1>
+            <p>{data?.homePage.content[1].desc}</p>
           </Col>
         </Row>
         <Row md={4}>
-          <Col>
-            <CardProgramStudy
-              title="TK Al - Hasanah"
-              cardClassName="wow fadeInUp"
-              cardDelayAnimation="100ms"
-              image={"images/assidiqiyah-logo.png"}
-            />
-          </Col>
-          <Col>
-            <CardProgramStudy
-              title="SD Al - Hasanah"
-              cardClassName="wow fadeInUp"
-              cardDelayAnimation="300ms"
-              image={"images/assidiqiyah-logo.png"}
-            />
-          </Col>
-          <Col>
-            <CardProgramStudy
-              title="SD Al - Hasanah"
-              cardClassName="wow fadeInUp"
-              cardDelayAnimation="500ms"
-              image={"images/assidiqiyah-logo.png"}
-            />
-          </Col>
-          <Col>
-            <CardProgramStudy
-              title="SD Al - Hasanah"
-              cardClassName="wow fadeInUp"
-              cardDelayAnimation="700ms"
-              image={"images/assidiqiyah-logo.png"}
-            />
-          </Col>
+          {data?.homePage.content[1].program_studies.map((item, index) => (
+            <Col key={item.id}>
+              <CardProgramStudy
+                title={item.title}
+                cardClassName="wow fadeInUp"
+                cardDelayAnimation="100ms"
+                image={`${process.env.REACT_APP_URL}${item.image.url}`}
+              />
+            </Col>
+          ))}
         </Row>
       </Container>
-
+      <div style={{ height: 50 }} />
       <Container>
         <Row>
           <Col>
             <h1 className="my-primary">
-              {props.section[2].title}
+              {data?.homePage.content[2].title}
               {/* <span className="font-weight-bold">Social Media</span> Update */}
             </h1>
           </Col>
@@ -112,7 +165,7 @@ export default function Home(prop) {
 
         <div className="abt-img" style={{ width: "100%" }}>
           <ul className="masonary">
-            {props.section[2].image.map((item, index) => (
+            {data?.homePage.content[2].images.map((item, index) => (
               <li
                 key={index}
                 className={`width${index + 1} wow zoomIn`}
@@ -134,46 +187,29 @@ export default function Home(prop) {
           </ul>
         </div>
       </Container>
-      <Container>
-        <Row style={{ display: "flex", justifyContent: "center" }}>
-          <Col md={9} className="text-center">
-            <h1 className="my-primary">
-              <span className="font-weight-bold">Recent</span> News
-            </h1>
-          </Col>
-        </Row>
-        <Row md={3}>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-        </Row>
-      </Container>
+      {data.posts.length > 0 && (
+        <Container>
+          <Row style={{ display: "flex", justifyContent: "center" }}>
+            <Col md={9} className="text-center">
+              <h1 className="my-primary">
+                <span className="font-weight-bold">Recent</span> News
+              </h1>
+            </Col>
+          </Row>
+          <Row md={3}>
+            {data.posts.map((item, index) => (
+              <Col key={index}>
+                <CardNews
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  content={`${item.content.substring(0, 80)} ...`}
+                  image={`${process.env.REACT_APP_URL}${item.image[0].formats.thumbnail.url}`}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      )}
     </Layout>
   );
-}
-
-export async function getStaticProps(context) {
-  const response = await fetch(`${process.env.REACT_APP_URL}/home-page`);
-  const data = await response.json();
-  console.log(data);
-  return {
-    props: {
-      data,
-    }, // will be passed to the page component as props
-  };
 }

@@ -1,41 +1,52 @@
-import Head from "next/head";
-import styles from "../styles/Achivements.module.scss";
-import cl from "classnames";
-
 import Layout from "../components/layouts";
-import { Card, Col, Container, Row } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenFancy } from "@fortawesome/free-solid-svg-icons";
-import CardNews from "../components/CardNews";
+import { Col, Container, Row } from "reactstrap";
 
 import Jumbotron from "../components/Jumbotron";
 
+// GRAPHQL
+import { gql, useQuery } from "@apollo/client";
+
+// UTILS
+import { getPublicUrl } from "../lib/utils";
+import CardAchievement from "../components/CardAchievement";
+
+const QUERY = gql`
+  query {
+    achievements(limit: 6, sort: "created_at:desc") {
+      id
+      title
+      subtitle
+      created_at
+      images {
+        ... on UploadFile {
+          name
+          formats
+          url
+        }
+      }
+    }
+  }
+`;
+
 export default function Achivements() {
+  const { loading, error, data } = useQuery(QUERY);
+
   return (
     <Layout>
       <Jumbotron title="ACHIVEMENTS" />
       <Container>
         <Row md={4}>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
-          <Col>
-            <CardNews />
-          </Col>
+          {data?.achievements.map((item, index) => (
+            <Col key={index}>
+              <CardAchievement
+                title={item.title}
+                subtitle={item.subtitle}
+                image={getPublicUrl(item.images[0])}
+              />
+            </Col>
+          ))}
         </Row>
-      </Container>{" "}
+      </Container>
     </Layout>
   );
 }

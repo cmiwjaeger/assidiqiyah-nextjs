@@ -49,8 +49,8 @@ export default function Footer() {
           </Col>
           <Col md={3}>
             <div className={styles.row}>
-              <div className="my-icon">
-                <FontAwesomeIcon icon={faPhone} />
+              <div className="my-icon mr-2">
+                <FontAwesomeIcon icon={faPhone} className="contact-info-svg" />
               </div>
               <div className={styles.column}>
                 <div className={styles.header}>Call</div>
@@ -58,8 +58,8 @@ export default function Footer() {
               </div>
             </div>
             <div className={styles.row}>
-              <div className="my-icon">
-                <FontAwesomeIcon icon={faClock} />
+              <div className="my-icon mr-2">
+                <FontAwesomeIcon icon={faClock} className="contact-info-svg" />
               </div>
               <div className={styles.column}>
                 <div className={styles.header}>Work Time</div>
@@ -67,8 +67,11 @@ export default function Footer() {
               </div>
             </div>
             <div className={styles.row}>
-              <div className="my-icon">
-                <FontAwesomeIcon icon={faMapMarkerAlt} />
+              <div className="my-icon mr-2">
+                <FontAwesomeIcon
+                  icon={faMapMarkerAlt}
+                  className="contact-info-svg"
+                />
               </div>
               <div className={styles.column}>
                 <div className={styles.header}>Address</div>
@@ -79,6 +82,13 @@ export default function Footer() {
             </div>
           </Col>
           <Col>Google Maps</Col>
+        </Row>
+        <Row style={{ height: 50 }}>
+          <Col>
+            <span style={{ color: "#575757" }}>
+              © Copyrights 2021 WLDGR x CMIW
+            </span>
+          </Col>
         </Row>
       </Container>
     </div>
