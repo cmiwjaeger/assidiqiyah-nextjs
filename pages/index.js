@@ -187,7 +187,7 @@ export default function Home(props) {
           </ul>
         </div>
       </Container>
-      {data.posts.length > 0 && (
+      {data?.posts.length > 0 && (
         <Container>
           <Row style={{ display: "flex", justifyContent: "center" }}>
             <Col md={9} className="text-center">
