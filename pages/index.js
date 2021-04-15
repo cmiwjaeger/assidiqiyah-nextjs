@@ -2,12 +2,15 @@ import Head from "next/head";
 import cl from "classnames";
 
 import Layout from "../components/layouts";
-import { Card, Col, Container, Row } from "reactstrap";
+import { Col, Container, Row } from "reactstrap";
 import CardNews from "../components/CardNews";
 import CardProgramStudy from "../components/CardProgramStudy";
+import Gallery from "../components/Gallery";
 
 import styles from "../styles/Home.module.scss";
-import { useEffect, useLayoutEffect } from "react";
+
+// UTILS
+import { getPublicUrl, splitBoldTitle } from "../lib/utils";
 
 import { gql, useQuery } from "@apollo/client";
 
@@ -42,6 +45,7 @@ const QUERY = gql`
         }
         ... on ComponentSectionsHeaderImage {
           id
+          title
           images {
             ... on UploadFile {
               name
@@ -76,17 +80,6 @@ const QUERY = gql`
 
 export default function Home(props) {
   const { loading, error, data } = useQuery(QUERY);
-
-  useLayoutEffect(() => {
-    setTimeout(() => {
-      $(".masonary").isotope({
-        masonry: {
-          columnWidth: 0.5,
-        },
-      });
-    }, 500);
-  }, []);
-  if (loading) return null;
 
   return (
     <Layout withBg>
@@ -124,7 +117,7 @@ export default function Home(props) {
               <img
                 height="200"
                 width="200"
-                src={`${process.env.REACT_APP_URL}${data?.homePage.content[0].images[0]?.formats.small.url}`}
+                src={getPublicUrl(data?.homePage.content[0].images[0])}
                 alt=""
                 className={styles.circular}
               />
@@ -139,18 +132,20 @@ export default function Home(props) {
             <p>{data?.homePage.content[1].desc}</p>
           </Col>
         </Row>
-        <Row md={4}>
-          {data?.homePage.content[1].program_studies.map((item, index) => (
-            <Col key={item.id}>
-              <CardProgramStudy
-                title={item.title}
-                cardClassName="wow fadeInUp"
-                cardDelayAnimation="100ms"
-                image={`${process.env.REACT_APP_URL}${item.image.url}`}
-              />
-            </Col>
-          ))}
-        </Row>
+        {data?.homePage.content[1].program_studies.length > 0 && (
+          <Row md={4}>
+            {data?.homePage.content[1].program_studies.map((item, index) => (
+              <Col key={item.id}>
+                <CardProgramStudy
+                  title={item.title}
+                  cardClassName="wow fadeInUp"
+                  cardDelayAnimation="100ms"
+                  image={`${process.env.REACT_APP_URL}${item.image.url}`}
+                />
+              </Col>
+            ))}
+          </Row>
+        )}
       </Container>
       <div style={{ height: 50 }} />
       <Container>
@@ -162,8 +157,11 @@ export default function Home(props) {
             </h1>
           </Col>
         </Row>
-
-        <div className="abt-img" style={{ width: "100%" }}>
+        {data?.homePage.content[2].images.length > 0 && (
+          <Gallery data={data?.homePage.content[2].images} />
+        )}
+        {/* 
+        <div className="abt-img">
           <ul className="masonary">
             {data?.homePage.content[2].images.map((item, index) => (
               <li
@@ -177,15 +175,13 @@ export default function Home(props) {
                   title=""
                   className="html5lightbox"
                 >
-                  <img
-                    src={`${process.env.REACT_APP_URL}${item.formats.thumbnail.url}`}
-                    alt=""
-                  />
+                  <img src={getPublicUrl(item)} alt="" />
                 </a>
               </li>
             ))}
           </ul>
         </div>
+      */}
       </Container>
       {data?.posts.length > 0 && (
         <Container>

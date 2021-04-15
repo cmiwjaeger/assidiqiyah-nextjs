@@ -9,7 +9,35 @@ import { faClock } from "@fortawesome/free-regular-svg-icons";
 
 import styles from "../../styles/Header.module.scss";
 
+// UTILS
+import { getPublicUrl, splitBoldTitle } from "../../lib/utils";
+
+import { gql, useQuery } from "@apollo/client";
+
+const QUERY = gql`
+  query {
+    header {
+      content {
+        ... on ComponentSectionsType6 {
+          id
+          title
+          desc
+          image {
+            ... on UploadFile {
+              name
+              formats
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export default function Header(props) {
+  const { data } = useQuery(QUERY);
+
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,48 +73,23 @@ export default function Header(props) {
             </div>
 
             <ul className="contact-add d-flex flex-wrap">
-              <li>
-                <div className="contact-info">
-                  <FontAwesomeIcon
-                    icon={faPhone}
-                    className="contact-info-svg"
-                  />
+              {data?.header?.content?.map((item) => (
+                <li key={item.id}>
+                  <div className="contact-info">
+                    <img
+                      width="14"
+                      height="14"
+                      src={getPublicUrl(item.image[0])}
+                      className="contact-info-svg"
+                    />
 
-                  <div className="contact-tt">
-                    <h4>Call</h4>
-                    <span>+2 342 5446 67</span>
+                    <div className="contact-tt">
+                      <h4>{item.title}</h4>
+                      <span>{item.desc}</span>
+                    </div>
                   </div>
-                </div>
-              </li>
-              <li>
-                <div className="contact-info">
-                  {/* <img src="assets/img/icon2.png" alt="" /> */}
-                  <FontAwesomeIcon
-                    icon={faClock}
-                    className="contact-info-svg"
-                  />
-
-                  <div className="contact-tt">
-                    <h4>Work Time</h4>
-                    <span>Mon - Fri 8 AM - 5 PM</span>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="contact-info">
-                  <FontAwesomeIcon
-                    icon={faMapMarkerAlt}
-                    className="contact-info-svg"
-                  />
-
-                  <div className="contact-tt">
-                    <h4>Address</h4>
-                    <span>
-                      Jl. Hos. Cokroaminoto no.2 Ciledug, Tangerang 15151
-                    </span>
-                  </div>
-                </div>
-              </li>
+                </li>
+              ))}
             </ul>
 
             <div

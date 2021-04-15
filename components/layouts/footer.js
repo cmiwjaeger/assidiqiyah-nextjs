@@ -1,22 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import {
-  Container,
-  Row,
-  Col,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import cl from "classnames";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,7 +9,35 @@ import { faClock } from "@fortawesome/free-regular-svg-icons";
 
 import styles from "../../styles/Footer.module.scss";
 
+// UTILS
+import { getPublicUrl, splitBoldTitle } from "../../lib/utils";
+
+import { gql, useQuery } from "@apollo/client";
+
+const QUERY = gql`
+  query {
+    header {
+      content {
+        ... on ComponentSectionsType6 {
+          id
+          title
+          desc
+          image {
+            ... on UploadFile {
+              name
+              formats
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export default function Footer() {
+  const { data } = useQuery(QUERY);
+
   return (
     <div style={{ backgroundColor: "#D1D1D1" }}>
       <Container>
@@ -48,38 +60,22 @@ export default function Footer() {
             </div>
           </Col>
           <Col md={3}>
-            <div className={styles.row}>
-              <div className="my-icon mr-2">
-                <FontAwesomeIcon icon={faPhone} className="contact-info-svg" />
-              </div>
-              <div className={styles.column}>
-                <div className={styles.header}>Call</div>
-                <div className={styles.subHeader}>+62 812371</div>
-              </div>
-            </div>
-            <div className={styles.row}>
-              <div className="my-icon mr-2">
-                <FontAwesomeIcon icon={faClock} className="contact-info-svg" />
-              </div>
-              <div className={styles.column}>
-                <div className={styles.header}>Work Time</div>
-                <div className={styles.subHeader}>Mon - Fri 8 AM - 5 PM</div>
-              </div>
-            </div>
-            <div className={styles.row}>
-              <div className="my-icon mr-2">
-                <FontAwesomeIcon
-                  icon={faMapMarkerAlt}
-                  className="contact-info-svg"
-                />
-              </div>
-              <div className={styles.column}>
-                <div className={styles.header}>Address</div>
-                <div className={styles.subHeader}>
-                  Jl. Hos. Cokroaminoto no.2 Ciledug, Tangerang 15151
+            {data?.header?.content?.map((item) => (
+              <div className={styles.row} key={item.key}>
+                <div className="my-icon mr-2">
+                  <img
+                    width="14"
+                    height="14"
+                    src={getPublicUrl(item.image[0])}
+                    className="contact-info-svg"
+                  />
+                </div>
+                <div className={styles.column}>
+                  <div className={styles.header}>{item.title}</div>
+                  <div className={styles.subHeader}>{item.desc}</div>
                 </div>
               </div>
-            </div>
+            ))}
           </Col>
           <Col>Google Maps</Col>
         </Row>

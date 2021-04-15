@@ -58,7 +58,6 @@ body {
 
   .circular {
     border-radius: 50%;
-    width: 100%;
   }
 
   .fa-li {
@@ -109,5 +108,10 @@ body {
       background-color: #ffffff;
       box-shadow: 0 2px 50px -30px #19a993;
     }
+  }
+
+  .my-icon {
+    width: 14px;
+    height: 14px;
   }
 }

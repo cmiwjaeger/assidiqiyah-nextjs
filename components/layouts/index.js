@@ -9,7 +9,7 @@ export default function Layout({ children, withBg }) {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Alhasanah</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {withBg ? (
