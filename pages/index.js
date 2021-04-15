@@ -117,7 +117,7 @@ export default function Home(props) {
               <img
                 height="200"
                 width="200"
-                src={getPublicUrl(data?.homePage.content[0].images[0])}
+                src={getPublicUrl(data?.homePage.content[0].images[0], "small")}
                 alt=""
                 className={styles.circular}
               />
@@ -140,7 +140,7 @@ export default function Home(props) {
                   title={item.title}
                   cardClassName="wow fadeInUp"
                   cardDelayAnimation="100ms"
-                  image={`${process.env.REACT_APP_URL}${item.image.url}`}
+                  image={getPublicUrl(item.image, "small")}
                 />
               </Col>
             ))}

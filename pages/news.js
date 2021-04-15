@@ -48,7 +48,7 @@ export default function News() {
                 title={item.title}
                 subtitle={item.subtitle}
                 content={`${item.content.substring(0, 80)} ...`}
-                image={`${process.env.REACT_APP_URL}${item.image[0].formats.thumbnail.url}`}
+                image={getPublicUrl(item.image[0], "small")}
               />
             </Col>
           ))}

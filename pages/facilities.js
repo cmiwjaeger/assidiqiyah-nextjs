@@ -39,7 +39,7 @@ export default function Facilities() {
               <CardFacility
                 title={item.title}
                 content={item.content}
-                image={getPublicUrl(item.images[0], "medium")}
+                image={getPublicUrl(item.images[0], "small")}
               />
             </Col>
           ))}
