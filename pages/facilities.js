@@ -1,8 +1,12 @@
 import Layout from "../components/layouts";
 import { Card, Col, Container, Row } from "reactstrap";
 import Jumbotron from "../components/Jumbotron";
-import { gql, useQuery } from "@apollo/client";
 import CardFacility from "../components/CardFacility";
+
+// UTILS
+import { getPublicUrl, splitBoldTitle } from "../lib/utils";
+
+import { gql, useQuery } from "@apollo/client";
 
 const QUERY = gql`
   query {
@@ -35,7 +39,7 @@ export default function Facilities() {
               <CardFacility
                 title={item.title}
                 content={item.content}
-                image={`${process.env.REACT_APP_URL}${item.images[0].formats.thumbnail.url}`}
+                image={getPublicUrl(item.images[0], "medium")}
               />
             </Col>
           ))}
