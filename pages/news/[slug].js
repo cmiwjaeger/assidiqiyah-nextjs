@@ -18,8 +18,8 @@ export default function NewsDetail(props) {
       <Container>
         <Row md={1}>
           <Col>
-            <h2>{news.title}</h2>
-            <span>{`${moment(news.published_at).format(
+            <h2>{news?.title}</h2>
+            <span>{`${moment(news?.published_at).format(
               "DD/mm/yyyy HH:mm"
             )} WIB`}</span>
           </Col>
@@ -27,14 +27,14 @@ export default function NewsDetail(props) {
         <Row className="pt-5">
           <Col>
             <img
-              src={getPublicUrl(news.image[0], "medium")}
+              src={getPublicUrl(news?.image[0], "medium")}
               style={{ maxWidth: "100%", height: "auto", marginBottom: 40 }}
             />
           </Col>
         </Row>
         <Row className="my-5">
           <Col>
-            <p style={{ whiteSpace: "pre-wrap" }}>{news.content}</p>
+            <p style={{ whiteSpace: "pre-wrap" }}>{news?.content}</p>
           </Col>
         </Row>
       </Container>
