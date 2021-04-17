@@ -57,7 +57,7 @@ export default function Header(props) {
         <div className="container">
           <div className="header-content d-flex flex-wrap align-items-center">
             <div className={cl([styles.ribbon_item, styles.logo])}>
-              <img width={59} height={59} src="images/assidiqiyah-logo.png" />
+              <img width={59} height={59} src="/images/assidiqiyah-logo.png" />
               <div>
                 <div
                   style={{

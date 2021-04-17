@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href="assets/css/main.min.css"
+            href="/assets/css/main.min.css"
           />
           <link
             rel="stylesheet"
@@ -24,7 +24,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
 
-          <script src="assets/js/bundle.min.js"></script>
+          <script src="/assets/js/bundle.min.js"></script>
           <NextScript />
         </body>
       </Html>

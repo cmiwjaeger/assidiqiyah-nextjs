@@ -23,6 +23,7 @@ const QUERY = gql`
       title
       content
       created_at
+      slug
       image {
         ... on UploadFile {
           name
@@ -49,6 +50,7 @@ export default function News() {
                 subtitle={item.subtitle}
                 content={`${item.content.substring(0, 80)} ...`}
                 image={getPublicUrl(item.image[0], "small")}
+                slug={item.slug}
               />
             </Col>
           ))}

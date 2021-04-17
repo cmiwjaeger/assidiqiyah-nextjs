@@ -18,14 +18,15 @@ import {
 import cl from "classnames";
 
 import styles from "./CardNews.module.scss";
+import Link from "next/link";
 
-export default function CardNews({ title, subtitle, content, image }) {
+export default function CardNews({ title, subtitle, content, image, slug }) {
   return (
     <Card className={styles.card}>
       <CardImg
         top
         width="100%"
-        src={image}
+        src={image ? image : "https://dummyimage.com/600x400/000/fff"}
         alt="Card image cap"
         className={styles.cardImage}
       />
@@ -35,13 +36,15 @@ export default function CardNews({ title, subtitle, content, image }) {
           {subtitle}
         </CardSubtitle>
         <CardText>{content}</CardText>
-        <Button color="link" className={styles.button}>
-          Read
-          <FontAwesomeIcon
-            icon={faLongArrowAltRight}
-            style={{ marginLeft: 10 }}
-          />
-        </Button>
+        <Link href={`/news/[slug]`} as={`/news/${slug}`}>
+          <Button color="link" className={styles.button}>
+            Read
+            <FontAwesomeIcon
+              icon={faLongArrowAltRight}
+              style={{ marginLeft: 10 }}
+            />
+          </Button>
+        </Link>
       </CardBody>
     </Card>
   );

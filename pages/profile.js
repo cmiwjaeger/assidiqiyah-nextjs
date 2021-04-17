@@ -102,7 +102,11 @@ export default function Profile() {
           >
             <div>
               <img
-                src={getPublicUrl(data?.profilePage.content[1].image[0])}
+                src={
+                  data?.profilePage.content[1].image[0]
+                    ? getPublicUrl(data?.profilePage.content[1].image[0])
+                    : "https://dummyimage.com/600x400/000/fff"
+                }
                 alt="Card image cap"
                 className="circular"
               />
@@ -118,7 +122,11 @@ export default function Profile() {
           >
             <div>
               <img
-                src={getPublicUrl(data?.profilePage.content[2].image[0])}
+                src={
+                  data?.profilePage.content[2].image[0]
+                    ? getPublicUrl(data?.profilePage.content[2].image[0])
+                    : "https://dummyimage.com/600x400/000/fff"
+                }
                 alt="Card image cap"
                 className="circular"
               />

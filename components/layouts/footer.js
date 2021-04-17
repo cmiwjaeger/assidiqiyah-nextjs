@@ -44,7 +44,7 @@ export default function Footer() {
         <Row className={styles.row} style={{ alignItems: "center" }}>
           <Col md={3}>
             <div className={styles.logo_wrapper}>
-              <img width={59} height={59} src="images/assidiqiyah-logo.png" />
+              <img width={59} height={59} src="/images/assidiqiyah-logo.png" />
               <div>
                 <div
                   style={{
@@ -61,7 +61,7 @@ export default function Footer() {
           </Col>
           <Col md={3}>
             {data?.header?.content?.map((item) => (
-              <div className={styles.row} key={item.key}>
+              <div className={styles.row} key={item.id}>
                 <div className="my-icon mr-2">
                   <img
                     width="14"

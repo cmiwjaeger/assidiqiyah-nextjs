@@ -21,6 +21,7 @@ const QUERY = gql`
       title
       content
       created_at
+      slug
       image {
         ... on UploadFile {
           name
@@ -199,7 +200,8 @@ export default function Home(props) {
                   title={item.title}
                   subtitle={item.subtitle}
                   content={`${item.content.substring(0, 80)} ...`}
-                  image={`${process.env.REACT_APP_URL}${item.image[0].formats.thumbnail.url}`}
+                  image={getPublicUrl(item.image[0], "small")}
+                  slug={item.slug}
                 />
               </Col>
             ))}
