@@ -86,7 +86,7 @@ export default function Teachers() {
               <CardTeacher
                 title={item.name}
                 subTitle={item.since}
-                image={getPublicUrl(item.image)}
+                image={getPublicUrl(item.image, "medium")}
               />
             </Col>
           ))}

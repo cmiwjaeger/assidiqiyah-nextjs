@@ -80,7 +80,7 @@ export default function Profile() {
       <Jumbotron title="PROFILE" />
 
       <Container className={styles.container}>
-        <Row style={{ display: "flex", alignItems: "center" }}>
+        <Row className="d-flex justify-content-center align-items-center">
           <Col
             xs={12}
             md={6}
@@ -97,40 +97,51 @@ export default function Profile() {
           <Col
             xs={12}
             md={6}
-            className="wow fadeInRight"
+            className="wow fadeInRight d-flex justify-content-center align-items-center"
             data-wow-duration="1000ms"
           >
-            <div>
-              <img
-                src={
-                  data?.profilePage.content[1].image[0]
-                    ? getPublicUrl(data?.profilePage.content[1].image[0])
-                    : "https://dummyimage.com/600x400/000/fff"
-                }
-                alt="Card image cap"
-                className="circular"
-              />
-            </div>
+            <img
+              src={
+                data?.profilePage.content[1].image[0]
+                  ? getPublicUrl(
+                      data?.profilePage.content[1].image[0],
+                      "medium"
+                    )
+                  : "https://dummyimage.com/600x400/000/fff"
+              }
+              alt="Card image cap"
+              style={{
+                height: 400,
+                width: 400,
+                borderRadius: "50%",
+              }}
+            />
           </Col>
         </Row>
-        <Row style={{ display: "flex", alignItems: "center" }}>
+        <Row className="d-flex justify-content-center align-items-center">
           <Col
             xs={12}
             md={6}
-            className="wow fadeInLeft"
+            className="wow fadeInLeft d-flex justify-content-center align-items-center"
             data-wow-duration="1000ms"
           >
-            <div>
-              <img
-                src={
-                  data?.profilePage.content[2].image[0]
-                    ? getPublicUrl(data?.profilePage.content[2].image[0])
-                    : "https://dummyimage.com/600x400/000/fff"
-                }
-                alt="Card image cap"
-                className="circular"
-              />
-            </div>
+            <img
+              src={
+                data?.profilePage.content[2].image[0]
+                  ? getPublicUrl(
+                      data?.profilePage.content[2].image[0],
+                      "medium"
+                    )
+                  : "https://dummyimage.com/600x400/000/fff"
+              }
+              alt="Card image cap"
+              className="circular"
+              style={{
+                height: 400,
+                width: 400,
+                borderRadius: "50%",
+              }}
+            />
           </Col>
 
           <Col
