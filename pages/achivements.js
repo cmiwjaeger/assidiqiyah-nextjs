@@ -41,7 +41,7 @@ export default function Achivements() {
               <CardAchievement
                 title={item.title}
                 subtitle={item.subtitle}
-                image={getPublicUrl(item.images[0])}
+                image={getPublicUrl(item.images[0], "medium")}
               />
             </Col>
           ))}
