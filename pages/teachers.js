@@ -81,7 +81,7 @@ export default function Teachers() {
         </Row>
 
         <Row md={4}>
-          {data?.schools[selectedSchoolIndex].teachers.map((item, index) => (
+          {data?.schools[selectedSchoolIndex]?.teachers?.map((item, index) => (
             <Col index={index}>
               <CardTeacher
                 title={item.name}
