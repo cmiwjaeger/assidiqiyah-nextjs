@@ -31,6 +31,7 @@ const QUERY = gql`
         ... on Teachers {
           id
           name
+          course
           image {
             ... on UploadFile {
               name
@@ -85,7 +86,7 @@ export default function Teachers() {
             <Col index={index}>
               <CardTeacher
                 title={item.name}
-                subTitle={item.since}
+                subTitle={item.course}
                 image={getPublicUrl(item.image, "medium")}
               />
             </Col>
