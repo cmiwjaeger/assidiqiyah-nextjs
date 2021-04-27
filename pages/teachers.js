@@ -50,7 +50,7 @@ export default function Teachers() {
 
   const [selectedSchoolIndex, setSelectedSchoolIndex] = useState(0);
 
-  const handleSelectSchool = () => (idx) => {
+  const handleSelectSchool = (idx) => () => {
     setSelectedSchoolIndex(idx);
   };
 
@@ -68,7 +68,7 @@ export default function Teachers() {
             const cardDelayAnimation = `${index * 100 + 100}ms`;
             return (
               <>
-                <Col onClick={handleSelectSchool(index)}>
+                <Col key={index} onClick={handleSelectSchool(index)}>
                   <CardProgramStudy
                     title={item.name}
                     cardClassName={cardClassName}
